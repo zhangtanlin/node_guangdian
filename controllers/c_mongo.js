@@ -1,23 +1,23 @@
 var mongoose = require('mongoose');
 var m_mongo = require('../models/m_mongo');
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 
-module.exports = {
+var c_model = {
   list:function(req,res,next){
     m_mongo.find({},function (err,resDate) {
       if(err) {
         return next(err);
       }else {
+        console.log(resDate);
         res.render('mongo', {
           title: "TestDB",
-          testData: resDate
+          listDate: resDate
         })
       }
     })
   },
   save:function (req,res,next) {
     var params = req.body;
-    console.log(params);
      m_mongo.create(params,function(err){
       if(err){
         return next(err);
@@ -28,3 +28,6 @@ module.exports = {
     });
   }
 }
+
+
+module.exports = c_model;
