@@ -8,7 +8,6 @@ var c_model = {
       if(err) {
         return next(err);
       }else {
-        console.log(resDate);
         res.render('mongo', {
           title: "TestDB",
           listDate: resDate
