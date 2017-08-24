@@ -20,6 +20,6 @@ var testSchema = new mongoose.Schema({
   Address: {type: String},
   timeDate: {type: Date, default: Date.now()}
 });
-var m_mongo = mongoose.model("testModel",testSchema,"testModel");//这个可能是验证集合的
+var m_mongo = mongoose.model("",testSchema,"testModel");//这个可能是验证集合的
 module.exports = m_mongo;
 
