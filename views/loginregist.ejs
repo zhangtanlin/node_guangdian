@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <%include include/head.ejs %>
+</head>
+<body style="display: table">
+      <div class="well" style="display: table-cell">
+        <h2>欢迎登录</h2>
+        <br/>
+        <div class="input-group input-group-md">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="请输入用户ID"/>
+        </div>
+        <br/>
+        <div class="input-group input-group-md">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-lock"></i>
+          </span>
+          <input type="password" class="form-control" placeholder="请输入密码"/>
+        </div>
+        <br/>
+        <button type="button" class="btn btn-success btn-block">登录</button>
+      </div>
+</body>
+<script type="text/javascript">
+  $(function(){
+    var info = {
+      name:"",
+      password:""
+    };
+    $("button").click(function(){
+      info.name = $("input[type=text]").val();
+      info.password = $("input[type=password]").val();
+      $.post("/loginregist/login",info,function(data){
+        console.log(data);
+      });
+    });
+  });
+</script>
+</html>
