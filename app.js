@@ -4,11 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
 var r_mongo = require('./routes/r_mongo');
+var r_loginregist = require('./routes/r_loginregist');
 
 var app = express();
 
@@ -28,6 +31,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/api',api);
 app.use('/mongo',r_mongo);
+app.use('/loginregist',r_loginregist);
 
 
 // catch 404 and forward to error handler
