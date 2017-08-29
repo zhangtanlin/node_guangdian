@@ -13,8 +13,7 @@ var c_loginregist = {
       if(err)return next(err);
       for(var i=0;i<resData.length;i++){
         if(resData[i].name == params.name && resData[i].password == params.password){
-          res.render('/index');
-          //res.redirect('/index');
+          res.send('/');
         }else{
           res.send({'success':false,'err':err});
         }

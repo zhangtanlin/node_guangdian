@@ -37,6 +37,7 @@
       info.password = $("input[type=password]").val();
       $.post("/loginregist/login",info,function(data){
         console.log(data);
+        location.href=data;
       });
     });
   });
