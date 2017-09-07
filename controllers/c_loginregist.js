@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+//引入登陆注册model
 var m_loginregist = require('../models/m_loginregist');
 
 var c_loginregist = {
@@ -19,8 +19,14 @@ var c_loginregist = {
         }
       }
     })
+  },
+  regist:function(req,res,next){
+    var params = req.body;
+    m_loginregist.create(params,function(err,resData){
+      if(err)return next(err);
+      res.send({'success':true,'err':err});
+    })
   }
 }
-
 
 module.exports = c_loginregist;

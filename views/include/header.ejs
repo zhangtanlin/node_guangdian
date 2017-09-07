@@ -1,22 +1,30 @@
-<header class="navbar navbar-gb" role="navigation">
+<header class="navbar navbar-gb">
 	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-		<a class="navbar-brand" href="#"><img src="/images/logo_big.png" alt="" /></a>
+		<a class="navbar-brand" href="#">
+			<img class="header_logo" src="/images/header_logo.png" alt="logo"/>
+			<img class="header_logoText hidden-xs" src="/images/header_textlogo.png" alt="logo"/>
+			<span class="header_address">四川大邑县</span>
+		</a>
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".headerAndNavList" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
 	</div>
-	<div id="navbar" class="navbar-collapse collapse">
-		<div class="gb_header_title hidden-sm hidden-xs">应急广播系统管理平台</div>
-		<ul class="nav navbar-nav" id="gb_header_nav">
-			<li class="gb_header_address"><a href="#">四川大邑县</a></li>
-			<li class="active"><a href="#">首页</a></li>
-		</ul>
+	<div class="headerAndNavList navbar-collapse collapse">
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href=""><span class="hidden-sm hidden-xs">头像</span>欢迎您,<span>张小霖</span></a></li>
-			<li><a href=""><span>退出</span></a></li>
+			<li>
+				<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+					<span class="hidden-sm hidden-xs">头像</span>欢迎您,<span>张小霖</span><b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">修改密码</a></li>
+					<li><a href="#">个人资料</a></li>
+					<li class="divider"></li>
+					<li><a href="#">退出</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 </header>

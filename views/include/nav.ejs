@@ -1,0 +1,17 @@
+<nav class="navbar-gb" role="navigation">
+	<div class="headerAndNavList navbar-collapse collapse">
+		<ul class="nav navbar-nav" id="nav_list"></ul>
+	</div>
+</nav>
+
+<script>
+	$(function(){
+	  $.get("/nav",function(data){
+	    var html="";
+	    for(var i=0;i<data.length;i++){
+	      html += '<li><a href="'+data[i].url+'">'+data[i].text+'</a></li>';
+	    }
+	    $("#nav_list").html(html);
+	  })
+	})
+</script>

@@ -3,12 +3,12 @@
 
 <head>
   <title><%= title %></title>
-  <%include include/head.ejs %>
+  <% include include/head.ejs %>
 </head>
 
 <body>
   <!--头部-->
-  <%include include/header.ejs %>
+  <% include include/header.ejs %>
 
   <!--中部-->
   <div class="container-fluid" id="gb_content">
@@ -17,18 +17,12 @@
           <!--手风琴导航-->
           <div class="col-md-2" id="gb_subnav">
 
-              <!--api的jsonp和json返回值-->
-              <a href="javascript:get_jsonp();">Click me for jsonp</a><br />
-              <textarea id="rjsonp" cols="50" rows="3"></textarea>
-              <br />
-              <a href="javascript:get_json();">Click me for json</a><br />
-              <textarea id="rjson" cols="50" rows="3"></textarea>
-
           </div>
 
           <!--内容区-->
           <div class="col-md-10" id="gb_frame">
-              <%include content_page/index_earth.ejs %>
+	          <% include include/nav.ejs %>
+	          <% include content_page/index_earth.ejs %>
           </div>
 
       </div>
@@ -39,17 +33,5 @@
 
 
 </body>
-<script type="text/javascript">
-  function get_jsonp() {
-    $.getJSON("http://127.0.0.1:3000/api?callback=?",function(data) {
-      $('#rjsonp').val('Jsonp info : ' + data.message);
-    });
-  }
 
-  function get_json(){
-    $.getJSON("/api",function(data) {
-      $('#rjson').val('Json info : ' + data.message);
-    });
-  }
-</script>
 </html>
