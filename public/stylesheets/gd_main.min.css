@@ -1,55 +1,27 @@
 /*bootstrap头部导航扩展navbar-gb*/
-.navbar-gb {background-color: #f8f8f8;border-color: #e7e7e7;}
-.navbar-gb .navbar-brand {height: 130px;}
+.navbar-gb {background-color: #2F364A;border: 0;margin-bottom: 0;border-radius: 0}
+.navbar-gb .navbar-brand {height: 60px;line-height:60px;padding: 0;font-size: 12px;}
+.navbar-gb .navbar-brand:after {clear: both;}
 .navbar-gb .navbar-brand:hover,.navbar-gb .navbar-brand:focus {cursor: pointer;}
-.navbar-gb .navbar-text {color: #777;}
-.navbar-gb .navbar-nav > li > a {color: #777;}
-.navbar-gb .navbar-nav > li > a:hover,.navbar-gb .navbar-nav > li > a:focus {color: #333;background-color: transparent;}
-.navbar-gb .navbar-nav > .active > a,.navbar-gb .navbar-nav > .active > a:hover,.navbar-gb .navbar-nav > .active > a:focus {color: #555;background-color: #e7e7e7;}
-.navbar-gb .navbar-nav > .disabled > a,.navbar-gb .navbar-nav > .disabled > a:hover,.navbar-gb .navbar-nav > .disabled > a:focus {color: #ccc;background-color: transparent;}
-.navbar-gb .navbar-toggle {border-color: #ddd;}
-.navbar-gb .navbar-toggle:hover,.navbar-gb .navbar-toggle:focus {background-color: #ddd;}
-.navbar-gb .navbar-toggle .icon-bar {background-color: #888;}
-.navbar-gb .navbar-collapse,.navbar-gb .navbar-form {border-color: #e7e7e7;margin-left: 115px;}
-.navbar-gb .navbar-nav > .open > a,.navbar-gb .navbar-nav > .open > a:hover,.navbar-gb .navbar-nav > .open > a:focus {color: #555;background-color: #e7e7e7;}
-.navbar-gb .navbar-header{height: 130px;}
+.navbar-gb .navbar-brand>*{float: left;}
+.navbar-gb .header_logo{padding: 0 10px;}
+.navbar-gb .header_address{font-size: 14px;color: #8D929C;padding-left: 10px;}
+.navbar-gb .header_address:hover{color: #8D929C;}
+
+
+.navbar-toggle{border:1px solid #fff;}
+.navbar-toggle .icon-bar{background-color:#fff;}
+
+
+
 @media (max-width: 767px) {
-    .navbar-gb .navbar-nav .open .dropdown-menu > li > a {color: #777;}
-    .navbar-gb .navbar-nav .open .dropdown-menu > li > a:hover,
-    .navbar-gb .navbar-nav .open .dropdown-menu > li > a:focus {color: #333;background-color: transparent;}
-    .navbar-gb .navbar-nav .open .dropdown-menu > .active > a,
-    .navbar-gb .navbar-nav .open .dropdown-menu > .active > a:hover,
-    .navbar-gb .navbar-nav .open .dropdown-menu > .active > a:focus {color: #555;background-color: #e7e7e7;}
-    .navbar-gb .navbar-nav .open .dropdown-menu > .disabled > a,
-    .navbar-gb .navbar-nav .open .dropdown-menu > .disabled > a:hover,
-    .navbar-gb .navbar-nav .open .dropdown-menu > .disabled > a:focus {color: #ccc;background-color: transparent;}
-    .navbar-gb .navbar-collapse{margin-left: 0;}
-	.navbar-gb .navbar-header{height: 130px;}
-	.navbar-gb .navbar-toggle{top: 40px;}
+	.navbar-gb .navbar-toggle{top: 5px;}
 }
-.navbar-gb .navbar-link {color: #777;}
-.navbar-gb .navbar-link:hover {color: #333;}
-.navbar-gb .btn-link {color: #777;}
-.navbar-gb .btn-link:hover,.navbar-gb .btn-link:focus {color: #333;}
-.navbar-gb .btn-link[disabled]:hover,fieldset[disabled] .navbar-gb .btn-link:hover,.navbar-gb .btn-link[disabled]:focus,fieldset[disabled] .navbar-gb .btn-link:focus {color: #ccc;}
+@media (min-width: 768px){
+  .navbar-nav>li>a {padding-top: 0;padding-bottom: 0;height:60px;line-height: 60px;}
+}
 
-/*头部*/
-.gb_header_title{height: 50px;line-height:50px;margin-top: 15px;font-weight: 900;font-size: 25px;}
 
+/*--------------------------------------------------------------------------------------------------------------------*/
 /*百度地图样式隐藏*/
 .anchorBL{display: none;}/*隐藏百度logo*/
-
-/*底部*/
-.footer{background-color: #ccc;}
-.footer>div{text-align: center;padding: 15px}
-
-/*中部默认样式*/
-#gb_content{}
-#gb_subnav{padding-left: 0;padding-right: 0;}/*中部二级菜单*/
-#gb_frame{padding-left: 0;padding-right: 0;position: relative;}/*中部二级内容*/
-
-
-/*首页*/
-.gb_index_table{font-size: 12px;width: 100%;}
-.gb_index_table th{text-align: center;}
-#gb_index_earth{min-height:500px;}
