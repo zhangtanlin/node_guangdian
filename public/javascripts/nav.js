@@ -14,15 +14,13 @@
           var ul = $("<ul></ul>");//创建一个子节点ul
           la.append(data[i].text);
           li.append(la);
-          li.append(ul);
-          _self.append(li);
-          // addList(data[i].menus,ul);
+          li.append(ul).appendTo(_self);
+          return addList(data[i].menus,ul);
         }else{
           var la = $("<a></a>");//创建一个子节点a
           var li = $("<li></li>");//创建一个子节点li
           la.append(data[i].text);
-          li.append(la);
-          _self.append(li);
+          li.append(la).appendTo(_self);
         }
       }
     }
