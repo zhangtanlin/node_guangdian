@@ -1,17 +1,46 @@
-<nav class="navbar-gb" role="navigation">
+<nav class="navbar-gb" id="nav" role="navigation">
 	<div class="headerAndNavList navbar-collapse collapse">
 		<ul class="nav navbar-nav" id="nav_list"></ul>
 	</div>
 </nav>
 
+<script src="/javascripts/nav.js"></script>
 <script>
 	$(function(){
 	  $.get("/nav",function(data){
-	    var html="";
-	    for(var i=0;i<data.length;i++){
-	      html += '<li><a href="'+data[i].url+'">'+data[i].text+'</a></li>';
-	    }
-	    $("#nav_list").html(html);
+//	    var ul = $("<ul></ul>");
+	    $("#nav_list").nav(data);
+//      $("#nav_list").append($.nav(data,ul));
+
+
+
+//	    var html="";
+//	    for(var i=0;i<data.length;i++){
+//	      html += '<li>';
+//        html += '<a href="'+data[i].url+'">'+data[i].text+'</a>';
+//        html += '<ul>';
+//        html += '<a href="'+data[i].url+'">'+data[i].text+'</a>';
+//        html += '<li href="'+data[i].url+'">'+data[i].text+'</li>';
+//        html += '</ul>';
+//        html += '</li>';
+//	    }
+//	    $("#nav_list").html(html);
+      //nav add event
+//      $("#nav_list")
+//      $("#gb_subnav").
+
+
+//      var text = ["5","2","0","1","3","1","4","7","0"];
+//      var index = ["5","4","0","0","3","5","8","6","1","7","4"];
+//      var numb = [];
+//      for(var i=0;i<index.length;i++){
+//        numb.push(text[index[i]]);
+//      }
+//      console.log(numb);
+
+
+
+
 	  })
 	})
 </script>
