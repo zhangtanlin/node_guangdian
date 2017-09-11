@@ -1,36 +1,47 @@
-<header class="navbar navbar-gb">
+<header class="navbar navbar-gb" role="navigation">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="#">
-			<img id="header_logo" src="/images/header_logo.png" alt="logo"/>
-			<img class="hidden-xs"id="header_logoText" src="/images/header_textlogo.png" alt="logo"/>
-			<span id="header_address">四川大邑县</span>
-		</a>
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".headerAndNavList" aria-expanded="false" aria-controls="navbar">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gb_header" aria-expanded="false" aria-controls="gb_header">
 			<span class="sr-only"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
+		<a class="navbar-brand" href="#"><img src="/images/logo.png" alt="" /></a>
 	</div>
-	<div class="headerAndNavList navbar-collapse collapse">
-		<ul class="nav navbar-nav navbar-right" id="header_user">
-			<li>
-				<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-          <img class="hidden-xs" src="/images/header.png" alt="header">
-          <span>欢迎您,</span>
-          <span>张小霖</span>
-          <b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu">
-					<li><a href="#">修改密码</a></li>
-					<li><a href="#">个人资料</a></li>
-					<li class="divider"></li>
-					<li><a href="#">退出</a></li>
-				</ul>
-			</li>
+	<div id="gb_header" class="navbar-collapse collapse">
+		<div class="hidden-xs" id="gb_header_title">
+			<img src="/images/header_textlogo.png" alt="">
+			<a id="gb_header_address" href="#">四川大邑县</a>
+		</div>
+		<!--导航-->
+		<ul class="nav navbar-nav navbar-left" id="gb_header_nav"></ul>
+		<!--右侧用户中心-->
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href=""><span class="hidden-sm hidden-xs">头像</span>欢迎您,<span>张小霖</span></a></li>
+			<li><a href=""><span>退出</span></a></li>
 		</ul>
 	</div>
 </header>
+
+<script src="/javascripts/jquery-nav.js"></script>
+<script>
+  $(function(){
+    $.get("/nav",function(data){
+      //生成导航树
+      $("#gb_header_nav").nav(data);
+      //点击一级菜单
+      $("#gb_header_nav>li>a").click(function(){
+        var clone = $(this).next("ul");
+        $("#gb_subnav").html(clone);
+      })
+    })
+  })
+</script>
+
+
+
+
+
 
 
 

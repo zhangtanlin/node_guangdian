@@ -1,34 +1,58 @@
 /*bootstrap头部导航扩展navbar-gb*/
-.navbar-gb {background-color: #2F364A;border: 0;margin-bottom: 0;border-radius: 0}
-.navbar-gb .navbar-brand {height: 60px;line-height:60px;padding: 0;font-size: 12px;}
-.navbar-gb .navbar-brand:after {clear: both;}
+.navbar-gb {background-color: #2f364a;border-color: #2f364a;margin-bottom: 0;border-radius: 0;}
+.navbar-gb .navbar-brand {height: 130px;}
 .navbar-gb .navbar-brand:hover,.navbar-gb .navbar-brand:focus {cursor: pointer;}
-.navbar-gb .navbar-brand>*{float: left;}
-#header_logo{padding: 0 10px;}
-#header_address{font-size: 14px;color: #8D929C;padding-left: 10px;}
-#header_address:hover{color: #8D929C;}
-/*头部用户信息*/
-#header_user{}
-#header_user>li{width: 200px;}
-#header_user>li>a{color:#fff;background-color: #15a4fa;padding-top: 0;padding-bottom: 0;height:60px;line-height: 60px;}
-#header_user>li>a>img{margin-right: 10px;}
-#header_user>li>a:hover{color:#fff;background-color: #15a4fa;}
-#header_user>li>ul{}
+.navbar-gb .navbar-text {color: #777;}
+.navbar-gb .navbar-nav > li > a {color: #777;}
+.navbar-gb .navbar-nav > li > a:hover,.navbar-gb .navbar-nav > li > a:focus {color: #333;background-color: transparent;}
+.navbar-gb .navbar-nav > .active > a,.navbar-gb .navbar-nav > .active > a:hover,.navbar-gb .navbar-nav > .active > a:focus {color: #555;background-color: #e7e7e7;}
+.navbar-gb .navbar-nav > .disabled > a,.navbar-gb .navbar-nav > .disabled > a:hover,.navbar-gb .navbar-nav > .disabled > a:focus {color: #ccc;background-color: transparent;}
+.navbar-gb .navbar-toggle {border-color: #ddd;}
+.navbar-gb .navbar-toggle:hover,.navbar-gb .navbar-toggle:focus {background-color: #ddd;}
+.navbar-gb .navbar-toggle .icon-bar {background-color: #888;}
+.navbar-gb .navbar-collapse,.navbar-gb .navbar-form {border-color: #e7e7e7;margin-left: 115px;}
+.navbar-gb .navbar-nav > .open > a,.navbar-gb .navbar-nav > .open > a:hover,.navbar-gb .navbar-nav > .open > a:focus {color: #555;background-color: #e7e7e7;}
+.navbar-gb .navbar-header{height: 130px;}
+.navbar-gb .navbar-link {color: #777;}
+.navbar-gb .navbar-link:hover {color: #333;}
+.navbar-gb .btn-link {color: #777;}
+.navbar-gb .btn-link:hover,.navbar-gb .btn-link:focus {color: #333;}
+.navbar-gb .btn-link[disabled]:hover,fieldset[disabled] .navbar-gb .btn-link:hover,.navbar-gb .btn-link[disabled]:focus,fieldset[disabled] .navbar-gb .btn-link:focus {color: #ccc;}
+@media (max-width: 767px) {
+  .navbar-gb .navbar-nav .open .dropdown-menu > li > a {color: #777;}
+  .navbar-gb .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-gb .navbar-nav .open .dropdown-menu > li > a:focus {color: #333;background-color: transparent;}
+  .navbar-gb .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-gb .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-gb .navbar-nav .open .dropdown-menu > .active > a:focus {color: #555;background-color: #e7e7e7;}
+  .navbar-gb .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-gb .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-gb .navbar-nav .open .dropdown-menu > .disabled > a:focus {color: #ccc;background-color: transparent;}
+  .navbar-gb .navbar-collapse{margin-left: 0;}
+  .navbar-gb .navbar-header{height: 130px;}
+  .navbar-gb .navbar-toggle{top: 40px;}
+}
+
 /*小屏开关按钮样式*/
 .navbar-toggle{border:1px solid #fff;top: 5px;}
 .navbar-toggle .icon-bar{background-color:#fff;}
-/*导航*/
-#nav{padding-left: 0;padding-right: 0;}
 
-@media (max-width: 767px) {
-  #header_user>li{width: 100%;height: 40px;line-height: 40px;}
-  /*#nav{padding-left: 0;padding-right: 0;}*/
-}
-@media (min-width: 768px){
-  .navbar-nav>li>a {width: 100%;}
-}
+/*头部*/
+#gb_header_nav{}
+#gb_header_title{height: 50px;line-height:50px;margin-top: 15px;font-weight: 900;font-size: 25px;}
+#gb_header_address{font-size: 14px;font-weight: 500;margin-left: 5px;text-decoration: none;cursor: default;color: #ACAEB4;}
 
+/*二级导航*/
+#gb_subnav{}
+#gb_subnav ul{padding: 0;margin: 0;list-style: none;height: 40px;line-height: 40px;}
+#gb_subnav ul li{}
+#gb_subnav ul li>a{}
 
-/*--------------------------------------------------------------------------------------------------------------------*/
+/*中部*/
+#gb_content{}
+#gb_content:after{clear: both;}
+#gb_subnav{float: left;width:200px;}
+#gb_frame{float: left;width:100%;}
+
 /*百度地图样式隐藏*/
 .anchorBL{display: none;}/*隐藏百度logo*/

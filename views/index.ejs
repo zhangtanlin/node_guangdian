@@ -11,18 +11,14 @@
   <% include include/header.ejs %>
 
   <!--中部-->
-  <div class="container-fluid" id="gb_content">
-      <div class="row">
-
-          <!--手风琴导航-->
-          <div class="col-md-2" id="gb_subnav">
-
-          </div>
+  <div id="gb_content">
 
           <!--内容区-->
-          <div class="col-md-10" id="gb_frame">
-	          <% include include/nav.ejs %>
+          <div id="gb_frame">
+
+	          <!--地图-->
 	          <% include content_page/index_earth.ejs %>
+
           </div>
 
       </div>
@@ -31,7 +27,8 @@
   <h1><%= title %></h1>
   <p>Welcome to<%= title %></p>
 
-
+  <!--底部-->
+	<%include include/footer.ejs%>
 </body>
 
 </html>
