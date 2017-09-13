@@ -1,27 +1,21 @@
-<header class="navbar navbar-gb" role="navigation">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gb_header" aria-expanded="false" aria-controls="gb_header">
-			<span class="sr-only"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="#"><img src="/images/logo.png" alt="" /></a>
-	</div>
-	<div id="gb_header" class="navbar-collapse collapse">
-		<div class="hidden-xs" id="gb_header_title">
-			<img src="/images/header_textlogo.png" alt="">
-			<a id="gb_header_address" href="#">四川大邑县</a>
-		</div>
-		<!--导航-->
-		<ul class="nav navbar-nav navbar-left" id="gb_header_nav"></ul>
-		<!--右侧用户中心-->
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href=""><span class="hidden-sm hidden-xs">头像</span>欢迎您,<span>张小霖</span></a></li>
-			<li><a href=""><span>退出</span></a></li>
-		</ul>
-	</div>
-</header>
+<div class="layui-header">
+	<div class="layui-logo"><a href="#"><img src="/images/logo.png" alt="" /></a></div>
+	<!-- 头部区域（可配合layui已有的水平导航） -->
+	<ul class="layui-nav layui-layout-left" id="gb_header_nav"></ul>
+	<ul class="layui-nav layui-layout-right">
+		<li class="layui-nav-item">
+			<a href="javascript:;">
+				<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+				贤心
+			</a>
+			<dl class="layui-nav-child">
+				<dd><a href="">基本资料</a></dd>
+				<dd><a href="">安全设置</a></dd>
+			</dl>
+		</li>
+		<li class="layui-nav-item"><a href="">退了</a></li>
+	</ul>
+</div>
 
 <script src="/javascripts/jquery-nav.js"></script>
 <script>
@@ -29,11 +23,6 @@
     $.get("/nav",function(data){
       //生成导航树
       $("#gb_header_nav").nav(data);
-      //点击一级菜单
-      $("#gb_header_nav>li>a").click(function(){
-        var clone = $(this).next("ul");
-        $("#gb_subnav").html(clone);
-      })
     })
   })
 </script>
