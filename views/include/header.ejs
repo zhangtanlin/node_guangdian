@@ -1,11 +1,12 @@
 <div class="layui-header">
 	<div class="layui-logo"><a href="#"><img src="/images/logo.png" alt="" /></a></div>
-	<!-- 头部区域（可配合layui已有的水平导航） -->
-	<ul class="layui-nav layui-layout-left" id="gb_header_nav"></ul>
+	<!-- 头部导航 -->
+	<ul class="layui-nav layui-layout-left" id="header_nav"></ul>
+	<!--个人信息-->
 	<ul class="layui-nav layui-layout-right">
 		<li class="layui-nav-item">
 			<a href="javascript:;">
-				<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+				<img src="/images/header.png" class="layui-nav-img">
 				贤心
 			</a>
 			<dl class="layui-nav-child">
@@ -22,7 +23,17 @@
   $(function(){
     $.get("/nav",function(data){
       //生成导航树
-      $("#gb_header_nav").nav(data);
+      $("#header_nav").nav(data);
+      //事件
+      $("#header_nav>li>a").click(function(){
+        var clone = $(this).next("ul").children("li").clone();
+        $("#subnav").html(clone);
+
+        $("#subnav>li").removeClass("layui-nav-itemed");
+        $("#subnav>li").eq(0).addClass("layui-nav-itemed");
+
+        $("#subnav>li>a").removeClass("layui-anim layui-anim-upbit layui-show");
+      })
     })
   })
 </script>

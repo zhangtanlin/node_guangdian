@@ -6,49 +6,42 @@
     var options = $.extend({},defaults, options);
     //重置导航和二级菜单
     function addList(data,_self){
-      // var elelist = [
-      //   "<li class='layui-nav-item'><a href='javascript:;'></a><ul></ul></li>",
-      //   "<li class='layui-nav-item'></li>",
-      //   "<a href=''></a>",
-      //   "<dl class='layui-nav-child'></dl>",
-      //   "<dd></dd>",
-      //   "<a href=''></a>"
-      // ],time = 0;
-      // for(var i in data){
-      //   if(data[i].url == ""){
-      //     console.log(data[i].text);
-      //     $(elelist[time]).children("a").html(data[i].text);
-      //     _self.append($(elelist[time]));
-      //     console.log($(elelist[time]).children("a"));
-      //   }else{
-      //     console.log(data[i].text);
-      //     $(elelist[time]).children("a").html(data[i].text);
-      //     _self.append($(elelist[time]));
-      //     console.log($(elelist[time]).children("a"));
-      //   }
+      //遍历数据
+      $.each(data,function(index,data){
+        //循环添加数据
+        if(data.url == ""){
+          var li = $('<li class="layui-nav-item"></li>');
+          var a  = $('<a href="javascript:;">'+data.text+'</a>');
+          var ul = $('<ul style="display: none;"></ul>');
+          li.append(a);
+          li.append(ul).appendTo(_self);
 
+          //添加二级菜单
+          $.each(data.menus,function(index,subnav){
+            if(subnav.url == ""){
+              var li = $('<li class="layui-nav-item"></li>');
+              var a  = $('<a href="javascript:;">'+subnav.text+'<span class="layui-nav-more"></span></a>');
+              var dl = $('<dl class="layui-nav-child"></dl>');
+              li.append(a);
+              li.append(dl).appendTo(ul);
 
-
-
-        //判定
-        if(data[i].url == ""){
-          var a,dl,li
-          //判断url为空的情况下,设为javascript:void(0);
-          a = $('<a href="javascript:;">'+options[i].text+'<span class="layui-nav-more"></span></a>');
-          dl = $('<dl class="layui-nav-child"></dl>');
-          var j_meuns = options[i].menus;
-          for(var j in j_meuns){
-            console.log(j_meuns[j]);
-            dd = $('<dd><a href="'+j_meuns[j].url+'">'+j_meuns[j].text+'</a></dd>');
-            dl.append(dd);
-          }
-          li.append(a).appendTo(this);
-          li.append(dl).appendTo(this);
+              //添加三级菜单
+              $.each(subnav.menus,function(index,thnav){
+                var dd = $('<dd><a href="'+thnav.url+'">'+thnav.text+'</a></dd>');
+                dl.append(dd);
+              })
+            }else{
+              var li = $('<li class="layui-nav-item"></li>');
+              var a  = $('<a href="javascript:;">'+subnav.text+'</a>');
+              li.append(a).appendTo(ul);
+            }
+          });
         }else{
-          a = $('<a href="'+options[i].url+'">'+options[i].text+'</a>');//创建一个子节点a
-          li.append(a).appendTo(this);
+          var li = $('<li class="layui-nav-item"></li>');
+          var a  = $('<a href="'+data.url+'">'+data.text+'</a>');
+          li.append(a).appendTo(_self);
         }
-
+      });
     }
     //调用
     addList(options,this);

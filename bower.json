@@ -1,0 +1,23 @@
+{
+  "name": "node-guangdian",
+  "description": "",
+  "main": "",
+  "authors": [
+    "zhangxiaolin <zhangtanlin90@126.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zhangtanlin/node_guangdian",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "layui": "https://github.com/sentsin/layui.git#^2.1.3",
+    "jquery": "1.12.4",
+    "html5shiv": "^3.7.3",
+    "respond": "^1.4.2"
+  }
+}
