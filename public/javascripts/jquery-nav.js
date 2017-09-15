@@ -1,13 +1,18 @@
 ;(function($){
   $.fn.nav = function(options){
+
     //默认数据
     var defaults = "";
+
     //用传递进来的值替换默认值
     var options = $.extend({},defaults, options);
+
     //重置导航和二级菜单
     function addList(data,_self){
+
       //遍历数据
       $.each(data,function(index,data){
+
         //循环添加数据
         if(data.url == ""){
           var li = $('<li class="layui-nav-item"></li>');
@@ -29,7 +34,7 @@
               $.each(subnav.menus,function(index,thnav){
                 var dd = $('<dd><a href="'+thnav.url+'">'+thnav.text+'</a></dd>');
                 dl.append(dd);
-              })
+              });
             }else{
               var li = $('<li class="layui-nav-item"></li>');
               var a  = $('<a href="javascript:;">'+subnav.text+'</a>');

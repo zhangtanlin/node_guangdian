@@ -11,6 +11,7 @@
 			</a>
 			<dl class="layui-nav-child">
 				<dd><a href="">基本资料</a></dd>
+				<dd><a href="">修改密码</a></dd>
 				<dd><a href="">安全设置</a></dd>
 			</dl>
 		</li>
@@ -20,7 +21,7 @@
 
 <script src="/javascripts/jquery-nav.js"></script>
 <script>
-  $(function(){
+  $(document).ready(function(){
     $.get("/nav",function(data){
       //生成导航树
       $("#header_nav").nav(data);
