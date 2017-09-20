@@ -12,8 +12,8 @@ var c_loginregist = {
     m_loginregist.find({},function(err,resData){
       if(err)return next(err);
       for(var i=0;i<resData.length;i++){
-        if(resData[i].name == params.name && resData[i].password == params.password){
-          res.send('/');
+        if(resData[i].user_name == params.name && resData[i].user_password == params.password){
+          res.redirect('/');
         }else{
           res.send({'success':false,'err':err});
         }
