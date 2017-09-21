@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var fileStore = require('session-file-store')(session);
 
 //路由调用
-var routes = require("./routes/routes");
+var admin = require("./routes/admin");
+var index = require("./routes/index");
 
 var app = express();
 
@@ -23,8 +25,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//session配置
+app.use(session({
+  name:'session',
+  secret:'secret',//用来对session id相关的cookie进行签名(值可以是任意值)
+  store: new fileStore(),//本地存储session(文本文件,也可以选择其他store,比如redis的)
+  saveUninitialized:false,//是否自动保存未初始化的会话,建议false
+  resave:false,//是否每次都重新保存会话,建议fasle,
+  cookie:{
+    maxAge:60*1000//有效期,单位是毫秒
+  }
+}));
+
 //路由调用
-routes(app);
+admin(app);
+index(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

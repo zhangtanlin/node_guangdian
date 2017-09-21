@@ -18,17 +18,22 @@
     <div class="layui-tab-content">
       <div class="layui-tab-item layui-show">
         <!--登录内容-->
-        <form class="layui-form" action="/loginregist/login" method="post">
+        <form class="layui-form" action="/admin/loginregist/login" method="post">
           <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-              <input class="layui-input" id="login_name" type="text" name="name" required lay-verify="required" placeholder="请输入用户名" autocomplete="off">
+              <input class="layui-input" type="text" name="name" required lay-verify="required" placeholder="请输入用户名" autocomplete="off">
             </div>
           </div>
           <div class="layui-form-item">
-            <label class="layui-form-label">密码框</label>
+            <label class="layui-form-label">密码</label>
             <div class="layui-input-block">
-              <input class="layui-input" id="login_pwd" type="password" name="password" required lay-verify="pwd" placeholder="请输入用户名" autocomplete="off">
+              <input class="layui-input" type="password" name="password" required lay-verify="pwd" placeholder="请输入用户名" autocomplete="off">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <a href="/admin/findpwd" class="layui-form-mid layui-word-aux" id="login_findPwd">忘记密码</a>
             </div>
           </div>
           <div class="layui-form-item">
