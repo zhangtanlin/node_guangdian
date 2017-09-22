@@ -1,11 +1,5 @@
 //引入登陆注册model
 var m_loginregist = require('../models/m_loginregist');
-//session信息
-var users = require('../session');
-//添加信息到内存中
-var findUser = function (name,password) {
-  return users.user.name === name && users.user.password === password;
-}
 
 var c_loginregist = {
   loginregist:function(req,res,next){
@@ -19,17 +13,10 @@ var c_loginregist = {
       if(err)return next(err);
       for(var i=0;i<resData.length;i++){
         if(resData[i].user_name == params.name && resData[i].user_password == params.password){
-          //把前端传的值添加到内存
-          var user = findUser(params.name,params.password);
-          req.session.regenerate(function(err){
-            if(err){
-              return res.json({ret_code:2,ret_msg:'登录失败'});
-            }
-            req.session.loginUser = user.name;
-            //返回首页
-            res.redirect('/');
-          })
-
+          var sess = req.session//用这个属性获取session中保存的数据，而且返回的JSON数据
+          console.log(sess);
+          //返回首页
+          res.redirect('/');
         }else{
           res.send({'success':false,'err':err});
         }
