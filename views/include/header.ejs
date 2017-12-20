@@ -7,43 +7,87 @@
     <!--判定session是否有值,有则显示-->
     <%= isLogined %>
     <% if(isLogined){ %>
-		<li class="layui-nav-item">
-			<a href="javascript:;">
-				<img src="/images/header.png" class="layui-nav-img">
-        <%= name %>
-			</a>
-			<dl class="layui-nav-child">
-				<dd><a href="">基本资料</a></dd>
-				<dd><a href="">修改密码</a></dd>
-				<dd><a href="">安全设置</a></dd>
-			</dl>
-		</li>
-		<li class="layui-nav-item"><a href="">退了</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <img src="/images/header.png" class="layui-nav-img">
+          <%= name %>
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">修改密码</a></dd>
+          <dd><a href="">安全设置</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="/admin/loginregist/logoutGet">退出</a></li>
     <% }else{ %>
-    <li class="layui-nav-item"><a href="/admin/loginregist">登录</a></li>
-    <li class="layui-nav-item"><a href="/admin/loginregist">注册</a></li>
+      <li class="layui-nav-item"><a href="/admin/loginregist/loginGet">登录</a></li>
+      <li class="layui-nav-item"><a href="/admin/loginregist/registGet">注册</a></li>
     <% } %>
 	</ul>
 </div>
 
 <script src="/javascripts/jquery-nav.js"></script>
 <script>
-  $(document).ready(function(){
-    $.get("/nav",function(data){
+  layui.use(['element','layer','jquery'], function() {
+    var element = layui.element, $ = layui.jquery, layer = layui.layer;
+
+    var frameH;
+
+    $(document).ready(function () {
+      //设置sub_页面所在iframe的高度和宽度
+      var windowH = $(window).height();
+      frameH = (windowH - 188) < 400 ? 400 : windowH - 188;
+    });
+    $(window).resize(function () {
+      //设置sub_页面所在iframe的高度和宽度
+      var windowH = $(window).height();
+      frameH = (windowH - 188) < 400 ? 400 : windowH - 188;
+    });
+
+    //请求导航数据
+    $.get("/nav", function (data) {
       //生成导航树
       $("#header_nav").nav(data);
-      //事件
-      $("#header_nav>li>a").click(function(){
+      //头部导航点击事件
+      $("#header_nav>li>a").click(function () {
+        //打开侧边栏并收缩中部frame和底部
+        $(".layui-side").css("left", 0);
+        $(".layui-body").css("left", "200px");
+        $(".layui-footer").css("left", "200px");
+        //判断如果点击的是第一个
+        if ($(this).text() == "首页") {
+          //获取首页的参数
+          var url = $(this).attr('url'), text = $(this).text(),id= $(this).attr("id");
+          //隐藏侧边栏并扩张中部frame和底部
+          $(".layui-side").css("left", "-200px");
+          $(".layui-body").css("left", 0);
+          $(".layui-footer").css("left", 0);
+          //如果点击的是首页，清除所有标签并添加首页标签
+          var li = $("#frameTabTitle li");
+          for(var i=0;i<li.length;i++){
+            var id = $(li[i]).attr("lay-id");
+            element.tabDelete('frameTab', id);//删除相应相应tab
+          };
+          element.tabAdd('frameTab',{
+            title:text,
+            content: '<iframe src="'+url+'" class="contentForm" frameborder="0" height="'+frameH+'" width="100%"></iframe>',
+            id:"welcome"
+          });
+          element.tabChange('frameTab', "welcome");
+        }
+        //点击克隆子节点
         var clone = $(this).next("ul").children("li").clone();
         $("#subnav").html(clone);
-
         $("#subnav>li").removeClass("layui-nav-itemed");
         $("#subnav>li").eq(0).addClass("layui-nav-itemed");
+        $("#subnav>li>a").removeClass("layui-anim layui-anim-upbit");
+      });
+      //默认触发第一个a标签
+      $("#header_nav>li>a").eq(0).trigger("click");
+    });
 
-        $("#subnav>li>a").removeClass("layui-anim layui-anim-upbit layui-show");
-      })
-    })
-  })
+
+  });
 </script>
 
 

@@ -24,19 +24,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-//session配置
+//cookie配置
 app.use(cookieParser('session_users'));
+//session配置
 app.use(session({
-  name:'session_users',//这里的name值得是cookie的name，默认cookie的name是：connect.sid
-  secret:'secret',//用来对session id相关的cookie进行签名(值可以是任意值)
-  // store: new fileStore(),//本地存储session(文本文件,也可以选择其他store,比如redis的)
+  name:'',                //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+  secret:'keyboard cat',  //用来对session id相关的cookie进行签名(值可以是任意值)
+  store: new fileStore(), //本地存储session(文本文件,也可以选择其他store,比如redis的)
   saveUninitialized:false,//是否自动保存未初始化的会话,建议false
-  resave:false,//是否每次都重新保存会话,建议fasle,
+  resave:false,           //是否每次都重新保存会话(只有一条session),建议false,
   cookie:('name','value',{
     path:'/',
     httpOnly:true,
     secure:false,
-    maxAge:60*1000//有效期,单位是毫秒
+    maxAge:30*1000        //有效期,单位是毫秒
   })
 }));
 

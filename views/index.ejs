@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title><%= title %></title>
   <% include include/head.ejs %>
 </head>
-
 <body>
 <div class="layui-layout layui-layout-admin">
 
 	<!--头部-->
 	<% include include/header.ejs %>
 
-	<!--中部-->
+	<!--中部二级导航-->
 	<div class="layui-side layui-bg-black">
 		<div class="layui-side-scroll">
 			<!-- 二级导航 -->
@@ -20,63 +18,65 @@
 		</div>
 	</div>
 
+  <!--中部frame区域-->
 	<div class="layui-body">
-		<!-- 内容主体区域 -->
-		<div>内容主体区域</div>
+    <!--选项卡-->
+    <div class="layui-tab" lay-filter="frameTab" lay-allowclose="true">
+      <ul class="layui-tab-title" id="frameTabTitle"></ul>
+      <div class="layui-tab-content"></div>
+    </div>
 	</div>
 
 	<%include include/footer.ejs%>
 </div>
 
+<script type="text/javascript">
+  layui.use(['element','layer','jquery'], function(){
+    var element = layui.element,$ = layui.jquery, layer = layui.layer;
 
+    var frameH;
 
+    $(document).ready(function(){
+      //设置sub_页面所在iframe的高度和宽度
+      var windowH = $(window).height();
+      frameH = (windowH-188)<400?400:windowH-188;
+    });
 
+    $(window).resize(function(){
+      //设置sub_页面所在iframe的高度和宽度
+      var windowH = $(window).height();
+      frameH = (windowH-188)<400?400:windowH-188;
+    });
 
+    //点击侧边导航调用页面
+    $('#subnav').delegate("a","click",function(){
+      var url = $(this).attr('url'), text = $(this).text(),id= $(this).attr("id");
+      //判断是否存在子页面链接
+      if(url){
+        //获取已存在的tab标签
+        var li = $("#frameTabTitle li"),state = true;
+        for(var i=0;i<li.length;i++){
+          if($(li[i]).attr("lay-id") == id){
+            //如果tab已经存在则跳转到相应tab
+            element.tabChange('frameTab', id);
+            state= false;
+            break;
+            return;
+          }
+        }
+        if(state){
+          element.tabAdd('frameTab',{
+            title:text,
+            content: '<iframe src="'+url+'" class="contentForm" height="'+frameH+'" frameborder="0" width="100%"></iframe>',
+            id:id
+          });
+          element.tabChange('frameTab', id);
+        }
+      }
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!--中部-->
-  <div id="gb_content">
-
-          <!--内容区-->
-          <div id="gb_frame">
-
-	          <!--地图-->
-	          <% include content_page/index_earth.ejs %>
-
-          </div>
-
-      </div>
-  </div>
-
-  <h1><%= title %></h1>
-  <p>Welcome to<%= title %></p>
-
-  <!--底部-->
-	<%include include/footer.ejs%>
+  });
+</script>
 </body>
 
 </html>

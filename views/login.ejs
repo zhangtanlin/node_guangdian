@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <%include include/head.ejs %>
+</head>
+<body id="loginRegist">
+
+<img src="/images/bg2.jpg" id="loginRegistBg" alt="">
+
+<div id="loginRegistBox">
+  <div class="layui-tab layui-tab-brief" lay-filter="loginTab">
+    <ul class="layui-tab-title">
+      <li class="layui-this">登录</li>
+    </ul>
+    <div class="layui-tab-content">
+      <div class="layui-tab-item layui-show">
+        <!--登录内容-->
+        <form class="layui-form" id="loginForm" action="" method="post">
+          <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+              <input class="layui-input" type="text" name="user_name" required lay-verify="required" placeholder="请输入用户名" autocomplete="off">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+              <input class="layui-input" type="password" name="user_password" required lay-verify="pwd" placeholder="请输入用户名" autocomplete="off">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <a href="/admin/findpwd" class="layui-form-mid layui-word-aux" id="login_findPwd">忘记密码</a>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="loginSub">立即提交</button>
+              <button class="layui-btn layui-btn-danger" type="button" onclick="location.href='/admin/loginregist/registGet'">
+                注册
+              </button>
+              <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+  //提交验证
+  layui.use(['form','layer'], function(){
+    var form = layui.form,layer = layui.layer;
+    //自定义验证规则
+    form.verify({
+      title: function(value){
+        if(value.length < 5){
+          return '标题也太短了吧';
+        }
+      }
+      ,pwd: [/(.+){6,12}$/, '密码必须6到12位']
+      ,phone:[/^1[3|4|5|7|8][0-9]{9}$/,'手机号码格式不正确']
+    });
+    //监听提交
+    form.on('submit(loginSub)', function(layData){
+      var loginFormList = layData.field;
+      $.post('/admin/loginregist/loginPost',loginFormList,function(data){
+        if(data.state){
+          location.href = data.address;
+        }else{
+          layer.alert('登录失败，请重新输入用户名和密码');
+          $("#loginForm input").val("");
+        }
+      });
+      return false;
+    });
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  $(function(){
+//    var info = {
+//      name:"",
+//      password:""
+//    };
+//    $("#login_sub").click(function(){
+//      info.name = $("#login_name").val();
+//      info.password = $("#login_pwd").val();
+//      var none = /\s/;
+//      if(!none.test(info.name)){
+//        $("#login_info").html("用户名不能为空");
+//      }else if(!none.test(info.password)){
+//        $("#login_info").html("密码不能为空");
+//      }else{
+//        $.post("/loginregist/login",info,function(data){
+//          console.log(data);
+//          if(data.success == true){
+//            location.href=data.info;
+//          }else{
+//            alert(data.err);
+//          }
+////          location.href=data;
+//        });
+//      }
+//    });
+//  });
+</script>
+</html>

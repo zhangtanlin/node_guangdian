@@ -5,52 +5,23 @@
   <title><%= title %></title>
   <%include include/head.ejs %>
 </head>
-<style>
-
-</style>
 <body id="loginRegist">
-<div class="" id="loginRegistBox">
-  <div class="layui-tab layui-tab-brief">
+
+<img src="/images/bg2.jpg" id="loginRegistBg" alt="">
+
+<div id="loginRegistBox">
+  <div class="layui-tab layui-tab-brief" lay-filter="loginTab">
     <ul class="layui-tab-title">
-      <li class="layui-this">登录</li>
-      <li>注册</li>
+      <li class="layui-this">注册</li>
     </ul>
     <div class="layui-tab-content">
       <div class="layui-tab-item layui-show">
-        <!--登录内容-->
-        <form class="layui-form" action="/admin/loginregist/login" method="post">
-          <div class="layui-form-item">
-            <label class="layui-form-label">用户名</label>
-            <div class="layui-input-block">
-              <input class="layui-input" type="text" name="name" required lay-verify="required" placeholder="请输入用户名" autocomplete="off">
-            </div>
-          </div>
-          <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-block">
-              <input class="layui-input" type="password" name="password" required lay-verify="pwd" placeholder="请输入用户名" autocomplete="off">
-            </div>
-          </div>
-          <div class="layui-form-item">
-            <div class="layui-input-block">
-              <a href="/admin/findpwd" class="layui-form-mid layui-word-aux" id="login_findPwd">忘记密码</a>
-            </div>
-          </div>
-          <div class="layui-form-item">
-            <div class="layui-input-block">
-              <button class="layui-btn" id="login_sub" lay-submit lay-filter="formDemo">立即提交</button>
-              <button class="layui-btn layui-btn-primary" id="login_reset" type="reset">重置</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="layui-tab-item">
         <!--注册内容-->
-        <form class="layui-form" action="/loginregist/login" method="post">
+        <form class="layui-form" id="registForm" action="" method="post">
           <div class="layui-form-item">
             <label class="layui-form-label">手机号码</label>
             <div class="layui-input-inline">
-              <input class="layui-input" type="text" required lay-verify="phone" placeholder="请输入手机号码" autocomplete="off">
+              <input class="layui-input" type="text" name="user_phone" required lay-verify="phone" placeholder="请输入手机号码" autocomplete="off">
             </div>
             <div class="layui-form-mid layui-word-aux">点击获取验证码</div>
           </div>
@@ -63,18 +34,19 @@
           <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-inline">
-              <input class="layui-input" type="text" required lay-verify="required" placeholder="请输入用户名" autocomplete="off">
+              <input class="layui-input" type="text" name="user_name" required lay-verify="required" placeholder="请输入用户名" autocomplete="off">
             </div>
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label">密码</label>
             <div class="layui-input-inline">
-              <input class="layui-input" type="text" required lay-verify="required" placeholder="请输入密码" autocomplete="off">
+              <input class="layui-input" type="text"name="user_password" required lay-verify="required" placeholder="请输入密码" autocomplete="off">
             </div>
           </div>
           <div class="layui-form-item">
             <div class="layui-input-block">
-              <button class="layui-btn" id="regist_sub" lay-submit lay-filter="formDemo">注册</button>
+              <button class="layui-btn" lay-submit lay-filter="registSub">注册</button>
+              <button class="layui-btn layui-btn-danger" type="button" onclick="location.href='/admin/loginregist/loginGet'">登录</button>
               <button class="layui-btn layui-btn-primary" id="login_reset" type="reset">重置</button>
             </div>
           </div>
@@ -85,13 +57,11 @@
 </div>
 
 
-
 </body>
 <script type="text/javascript">
-
   //提交验证
-  layui.use('form', function(){
-    var form = layui.form;
+  layui.use(['form','layer'], function(){
+    var form = layui.form,layer = layui.layer;
     //自定义验证规则
     form.verify({
       title: function(value){
@@ -102,9 +72,20 @@
       ,pwd: [/(.+){6,12}$/, '密码必须6到12位']
       ,phone:[/^1[3|4|5|7|8][0-9]{9}$/,'手机号码格式不正确']
     });
+
     //监听提交
-    form.on('submit(*)', function(data){
-      console.log(data)
+    form.on('submit(registSub)', function(layData){
+      var registFormList = layData.field;
+      console.log(registFormList);
+      $.post('/admin/loginregist/registPost',registFormList,function(data){
+        console.log(data);
+        if(data.state == true){
+          location.href = data.address;
+        }else{
+          layer.alert('注册失败，请重新注册');
+          $("#registForm input").val("");
+        }
+      });
       return false;
     });
 

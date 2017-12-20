@@ -1,3 +1,13 @@
-
-#loginRegist{background-image: url("/images/bg2.jpg");background-position:center center;background-repeat: no-repeat;}
+/*修改layui样式*/
+.layui-side{left:-200px;}
+.layui-body{left:0;}
+.layui-layout-admin .layui-footer{left:0;}
+.layui-nav-tree .layui-nav-child a{cursor: pointer;}
+/*新增样式*/
+.textAlignCenter{text-align: center;}
+/*登录注册*/
+#loginRegist{}
+#loginRegistBg{position: absolute;z-index: -1;width: 100%;height: 100%;}
 #loginRegistBox{width: 450px;height: 310px;position: absolute;top: 50%;left: 50%;margin-left: -225px;margin-top: -150px;border: 1px solid #e2e2e2;padding: 20px;}
+/*找回密码界面*/
+#findpwdSendVerifyBtn{cursor: pointer;}

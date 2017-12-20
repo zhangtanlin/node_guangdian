@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <% include ../../include/head.ejs %>
+</head>
+<body>
+  <blockquote class="layui-elem-quote">条件查询</blockquote>
+  <!--查询表单-->
+  <form class="layui-form" action="">
+    <div class="layui-fluid">
+      <div class="layui-row">
+        <div class="layui-col-md4">
+          <div class="layui-form-item">
+            <label class="layui-form-label">预警名称</label>
+            <div class="layui-input-block">
+              <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md4">
+          <div class="layui-form-item">
+            <label class="layui-form-label">预警类型</label>
+            <div class="layui-input-block">
+              <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md4">
+          <div class="layui-form-item">
+            <label class="layui-form-label">预警级别</label>
+            <div class="layui-input-block">
+              <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="layui-row">
+        <div class="layui-col-md4">
+          <div class="layui-form-item">
+            <label class="layui-form-label">生效时间</label>
+            <div class="layui-input-block">
+              <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md4">
+          <div class="layui-form-item">
+            <label class="layui-form-label">发布单位</label>
+            <div class="layui-input-block">
+              <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md4">
+          <div class="layui-form-item">
+            <label class="layui-form-label">预警人员</label>
+            <div class="layui-input-block">
+              <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="layui-row">
+        <div class="layui-col-md12">
+          <div class="textAlignCenter">
+            <button class="layui-btn" lay-submit lay-filter="zxbjSub">查询</button>
+            <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!--分割线-->
+  <hr class="layui-bg-orange">
+
+  <!--操作按钮-->
+  <div id="zxbjGetListTool"></div>
+  <button class="layui-btn">新增</button>
+  <button class="layui-btn layui-btn-danger" data-type="getCheckData">获取选中行数据</button>
+  <button class="layui-btn layui-btn-normal" data-type="getCheckLength">获取选中数目</button>
+  <button class="layui-btn layui-btn-normal" data-type="isAll">验证是否已全选</button>
+  <button class="layui-btn" data-type="parseTable">初始化</button>
+  
+  <br class="layui-col-space8">
+
+  <!--列表-->
+  <table class="layui-table" lay-data="{height:'488', url:'/yjgl/yjcj/zxbjGetList', page:true, limit: 10, id:'zxbjGetList'}" lay-filter="zxbjGetList">
+    <thead>
+    <tr>
+      <th lay-data="{checkbox:true, fixed: true}"></th>
+      <th lay-data="{field:'name'}">预警名称</th>
+      <th lay-data="{field:'type'}">预警类型</th>
+      <th lay-data="{field:'rank'}">预警级别</th>
+      <th lay-data="{field:'time',sort: true}">生效时间</th>
+      <th lay-data="{field:'section'}">发布单位</th>
+      <th lay-data="{field:'scope'}">影响范围</th>
+      <th lay-data="{field:'person'}">预警人员</th>
+      <th lay-data="{field:'phone'}">联系电话</th>
+    </tr>
+    </thead>
+  </table>
+
+	<!--列表2-->
+	<!--<table id="zxbjGetList" lay-filter="zxbjGetList"></table>-->
+
+  <script>
+    layui.use('table', function(){
+      var table = layui.table;
+      
+      var $ = layui.jquery, active = {
+        getCheckData: function(){
+          var checkStatus = table.checkStatus('zxbjGetList')
+            ,data = checkStatus.data;
+          layer.alert(JSON.stringify(data));
+        }
+        ,getCheckLength: function(){
+          var checkStatus = table.checkStatus('zxbjGetList')
+            ,data = checkStatus.data;
+          layer.msg('选中了：'+ data.length + ' 个');
+        }
+        ,isAll: function(){
+          var checkStatus = table.checkStatus('zxbjGetList');
+          layer.msg(checkStatus.isAll ? '全选': '未全选')
+        }
+        ,parseTable: function(){
+          table.init('zxbjGetList');
+        }
+      };
+      $('.layui-btn').on('click', function(){
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+      });
+
+
+//			组件2
+//			table.render({
+//		    elem: '#zxbjGetList'
+//		    ,url: '/yjgl/yjcj/zxbjGetList'
+//		    ,page: { //详细参数可参考 laypage 组件文档
+//		      curr: 5
+//		      ,groups: 1
+//		      ,first: false
+//		      ,last: false
+//		      ,layout: ['limit', 'prev', 'page', 'next', 'count'] //自定义分页布局
+//		    }
+//		    ,height: 488
+//		    ,cellMinWidth: 80
+//		    ,cols: [[
+//		      {type: 'checkbox'}
+//		      ,{field:'name', title:'预警名称', unresize: true, sort: true}
+//		      ,{field:'type', title:'预警类型', templet: '#usernameTpl'}
+//		      ,{field:'rank', title:'预警级别'}
+//		      ,{field:'time', title:'生效时间', templet: '#switchTpl', minWidth: 85, align:'center'}
+//		      ,{field:'section', title:'发布单位', templet: '#checkboxTpl', minWidth: 110, align:'center'}
+//		      ,{field:'scope', title:'影响范围'}
+//		      ,{field:'person', title:'预警人员'}
+//		      ,{field:'phone', title:'联系电话'}
+//		    ]]
+//		  });
+
+
+    });
+  </script>
+</body>
+
+</html>
