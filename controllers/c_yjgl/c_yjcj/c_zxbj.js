@@ -27,8 +27,8 @@ var c_zxbj = {
 		var query = m_zxbj.find({});
     var limit = Number(limit);
     var page = Number(page);
-    query.limit(limit);//限制条数【注意参数必须转成数值型格式，不能使用字符串格式】
-		query.skip(page);  //控制页数【注意参数必须转成数值型格式，不能使用字符串格式】
+    query.limit(limit);//限制条数【参数必须转成数值，不能使用字符串】
+		query.skip(page);  //控制页数【参数必须转成数值，不能使用字符串】
 		query.exec(function(err,resData){
 			if(err)return next(err);
 			var count = resData.length;
