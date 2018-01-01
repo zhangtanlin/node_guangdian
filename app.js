@@ -8,7 +8,7 @@ var session = require('express-session');
 var fileStore = require('session-file-store')(session);//创建本地session文件夹用来存储session
 
 //路由调用
-var admin = require("./routes/admin");
+var user = require("./routes/admin");
 var index = require("./routes/index");
 
 var app = express();
@@ -29,10 +29,10 @@ app.use(cookieParser('session_users'));
 //session配置
 app.use(session({
   name:'',                //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-  secret:'keyboard cat',  //用来对session id相关的cookie进行签名(值可以是任意值)
+  secret:'secret',        //用来对session id相关的cookie进行签名(值可以是任意值)
   store: new fileStore(), //本地存储session(文本文件,也可以选择其他store,比如redis的)
   saveUninitialized:false,//是否自动保存未初始化的会话,建议false
-  resave:false,           //是否每次都重新保存会话(只有一条session),建议false,
+  resave:false,           //是否每次都重新保存会话,建议fasle,
   cookie:('name','value',{
     path:'/',
     httpOnly:true,
@@ -42,8 +42,8 @@ app.use(session({
 }));
 
 //路由调用
-admin(app);
-index(app);
+index(app);	//app.use("/",require('./routes/index'));
+user(app);	//app.use("/admin",require('./routes/admin'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

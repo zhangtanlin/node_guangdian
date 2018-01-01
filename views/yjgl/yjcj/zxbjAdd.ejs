@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <% include ../../include/head.ejs %>
+</head>
+<body class="frameBody">
+	<div class="layui-upload-drag" id="layuiUpload">
+	  <i class="layui-icon">&#xe67c;</i>
+	  <p>点击上传，或将文件拖拽到此处</p>
+	  <!--<img src="/images/header.png" id="layuiUploadImg" width="258" height="135"/>-->
+	   <img src="" id="layuiUploadImg" width="258" height="135"/>
+	</div>
+	
+	<form action="/yjgl/yjcj/zxbjGetAddPost" method="get">
+		<input type="file" name="updata" id="updata" value=""/><label for="updata">表单上传</label>
+		<input type="submit" value="提交"/>
+	</form>
+	
+	<script>
+		layui.use('upload', function(){
+		  var $ = layui.jquery,upload = layui.upload;
+		  
+			//上传方法
+		  upload.render({
+		    elem: '#layuiUpload'
+		    ,url: '/yjgl/yjcj/zxbjGetAddPost'
+		    ,method:'post'
+		    ,accept:'images'
+		    ,size:100
+		    ,multiple:false//是否支持多文件上传
+		    ,number:1//配置同时可上传数量，0表示不限制
+		    ,drag:true//是否支持拖拽上传不支持ie8/9
+		    ,choose:function(data){
+		    	console.log("aaa"+data);
+		    }//选择文件后的毁掉函数返回一个obj参数
+		    ,done: function(res,index,upload){
+		      console.log("bbb"+res.data.src);
+		      $("#layuiUploadImg").attr("src",res.data.src);
+		    }//执行上传后的回调，返回三个参数【res(服务端相应信息),index(当前文件的索引),upload(重新上传方法，一般在上传失败使用)】
+		    ,error:function(index,upload){
+		    	console.log("ccc"+index);
+		    }//上传异常后的回调，返回两个参数【index(当前文件的索引),upload(重新上传的方法)】
+		  });
+		  
+		  
+		});
+	</script>
+</body>
+</html>

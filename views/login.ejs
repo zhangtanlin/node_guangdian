@@ -55,8 +55,8 @@
 </body>
 <script type="text/javascript">
   //提交验证
-  layui.use(['form','layer'], function(){
-    var form = layui.form,layer = layui.layer;
+  layui.use(['form','layer','jquery'], function(){
+    var form = layui.form,layer = layui.layer,$ = layui.jquery;
     //自定义验证规则
     form.verify({
       title: function(value){

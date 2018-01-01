@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../../include/head.ejs %>
+</head>
+<body>
+  <%= title %>
+
+  <form action="/yjgl/yjcj/dhcjPost" enctype="multipart/form-data" method="post">
+    <input type="file" name="thumbnail" id="upload">
+    <input type="submit" value="点击提交" id="uploadSub">
+  </form>
+
+</body>
+</html>
