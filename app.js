@@ -37,7 +37,7 @@ app.use(session({
     path:'/',
     httpOnly:true,
     secure:false,
-    maxAge:30*1000        //有效期,单位是毫秒
+    maxAge:90000*1000        //有效期,单位是毫秒
   })
 }));
 

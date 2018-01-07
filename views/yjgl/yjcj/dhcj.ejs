@@ -1,15 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <% include ../../include/head.ejs %>
-</head>
-<body>
-  <%= title %>
 
-  <form action="/yjgl/yjcj/dhcjPost" enctype="multipart/form-data" method="post">
-    <input type="file" name="thumbnail" id="upload">
-    <input type="submit" value="点击提交" id="uploadSub">
-  </form>
+	<head>
+		<% include ../../include/head.ejs %>
+	</head>
 
-</body>
+	<body>
+		<!--表单提交1-->
+		<!--<form action="/yjgl/yjcj/dhcjFilePost" enctype="multipart/form-data" method="post">
+		    <input type="file" name="thumbnail" id="upload">
+		    <input type="text" name="name" id="name"/>
+		    <input type="submit" value="点击提交" id="uploadSub">
+		</form>-->
+
+		<!--表单提交2及方法-->
+		<form id="dhcjForm">
+			<label for="thumbnail">表单提交2</label>
+			<input type="file" name="thumbnail" id="thumbnail">
+			<input type="text" name="name" id="name">
+			<input type="submit" value="点击提交" id="uploadSub">
+		</form>
+		<script type="text/javascript">
+			layui.use(['upload', 'jquery', 'layer'], function() {
+				var $ = layui.jquery,
+					upload = layui.upload,
+					layer = layui.layer;
+				$("#uploadSub").click(function() {
+					
+					/*FormData使用方法一*/
+//					var file = $("input[type=file]")[0];//file的dom对象
+//					var formData = new FormData();      //h5表单对象，可以ajax提交二进制数据
+//					for(var i = 0; i < file.files.length; i++) {
+//						formData.append(file.name, file.files[i]);
+//					}
+//					var text = $("#name").val();
+//					formData.append("name",text);
+					
+					/*FormData使用方法二*/
+//					var dhcjForm = document.getElementById("dhcjForm");//如果用FormData"序列化"数据，需要使用原生js方法获取dom
+//					var formData = new FormData(dhcjForm); 
+					
+					/*FormData使用方法 三*/
+					var formData = new FormData($("#dhcjForm")[0]);
+					
+					$.ajax({
+						url:'/yjgl/yjcj/dhcjFilePost',
+						type: "post",
+						data: formData,
+						dataType: "json",
+						processData: false,//告诉jQuery不要去处理发送的数据
+						contentType: false,//告诉jQuery不设置Content-Type请求头
+						success: function(data) {
+							console.log(data);
+						},
+						error: function(e) {
+							console.log("失败" + e);
+						}
+					});
+					return false;
+				});
+
+			})
+		</script>
+		
+		
+		
+		
+	</body>
+
 </html>

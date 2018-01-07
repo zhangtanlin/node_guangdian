@@ -50,13 +50,6 @@ var c_zxbj = {
 		res.render('yjgl/yjcj/zxbjAdd', {
 			title: '新增'
 		})
-	},
-
-	//在线编辑【新增提交】
-	zxbjGetAddPost: function(req, res, next) {
-		//console.log(req.files);
-		console.log(req.files);
-		res.send({"code": 0,"msg": "","data": {"src": "/images/header.png"}});
 	}
 
 }
