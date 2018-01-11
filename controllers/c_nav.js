@@ -2,11 +2,15 @@
 var m_nav = require('../models/m_nav');
 
 var c_nav = {
-  nav:function(req,res,next){
-    m_nav.find({},function (err,resData) {
-      res.send(resData);
-    })
-  }
+    nav: function (req, res, next) {
+        if(!req.session.sign){
+            res.send("");
+        }else{
+            m_nav.find({},function (err,resData) {
+                res.send(resData);
+            })
+        }
+    }
 }
 
 

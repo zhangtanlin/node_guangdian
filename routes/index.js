@@ -1,3 +1,7 @@
+//session过期后调用登录界面
+var session = require("./session");
+
+
 module.exports = function(app){
 
   //首页
@@ -30,9 +34,9 @@ module.exports = function(app){
 
   //预警采集-在线编辑
   var c_zxbj = require('../controllers/c_yjgl/c_yjcj/c_zxbj');
-  app.get('/yjgl/yjcj/zxbjGet',c_zxbj.zxbjGet);
+  app.get('/yjgl/yjcj/zxbjGet',session.sessionOut,c_zxbj.zxbjGet);//添加了session验证的界面跳转
   app.get('/yjgl/yjcj/zxbjGetList',c_zxbj.zxbjGetList);
-  app.get('/yjgl/yjcj/zxbjGetAdd',c_zxbj.zxbjGetAdd);	      //新增【获取页面】
+  app.get('/yjgl/yjcj/zxbjGetAdd',c_zxbj.zxbjGetAdd);				  //新增【获取页面】
   //app.post('/yjgl/yjcj/zxbjGetAddPost',c_zxbj.zxbjGetAddPost);//新增【提交】
 
   //电话采集
